@@ -11,7 +11,7 @@ def blog_list(request):
     return render(request, 'blog/list.html', {'posts': posts})
 
 def blog_detail(request, pk):
-    post = get_object_of_404(Blog, pk=pk)
+    post = get_object_or_404(Blog, pk=pk)
     return render(request, 'blog/detail.html', {'post': post})
 
 def blog_new(request):

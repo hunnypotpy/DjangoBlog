@@ -1,21 +1,27 @@
 {% load static %}
+{% load bootstrap4 %}
 <!doctype html>
 
 <html lang="en">
   <head>
     <meta charset="utf-8">
-
     <title>My First Django Blog</title>
     <meta name="description" content="My first Django app">
     <meta name="author" content="PDM">
 
+    {% bootstrap_css %}
+    {% bootstrap_javascript jquery='full' %}
+
     <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
+
     <!-- if you want some nice styling: -->
     <script src="//cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script>
-
   </head>
 
   <body>
+    {# Display django.contrib.messages as Bootstrap alerts #}
+    {% bootstrap_messages %}
+
     {% block content %}{% endblock %}
     <script src="{% static 'js/script.js' %}"></script>
 
