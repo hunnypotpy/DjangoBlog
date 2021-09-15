@@ -2,7 +2,17 @@
 
 {% block content %}
 
-    <table>
+<div class="jumbotron">
+  <h1 class="display-4">Hello, world!</h1>
+  <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+  <hr class="my-4">
+  <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+  </p>
+</div>
+
+    <table class="table">
       <thead>
         <tr>
           <th>Title</th>
@@ -19,15 +29,15 @@
                 <td>{{ post.slug }}</td>
                 <td>{{ post.post }}</td>
                 <td><img src="{{ post.cover }}" alt="post cover"></td>
-                <td><a href="{% url "blog:blog_detail" post.id %}">Edit</a></td>
-                <td><a href="{% url "blog:blog_delete" post.id %}">Delete</a></td>
+                <td><a href="{% url "blog:blog_detail" post.id %}" class="btn btn-outline-warning">Edit</a></td>
+                <td><a href="{% url "blog:blog_delete" post.id %}" class="btn btn-outline-danger">Delete</a></td>
             </tr>
             {% endfor %}
       </tbody>
     </table>
 
     <div>
-        <a href="{% url "blog:blog_new" %}">Add a post</a>
+        <a href="{% url "blog:blog_new" %}" class="btn btn-primary">Add a post</a>
     </div>
 
 {% endblock %}
