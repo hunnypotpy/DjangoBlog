@@ -1,4 +1,5 @@
 {% load static %}
+
 {% load bootstrap4 %}
 <!doctype html>
 
@@ -22,8 +23,26 @@
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
 
-    {% block content %}{% endblock %}
+    {% block content %}
+
+    {% endblock %}
+
+
     <script src="{% static 'js/script.js' %}"></script>
+
+    {% block content %}
+
+  <h2>My Django Blog 2 </h2>
+
+    {% if request.user.is_authenticated %}
+      Welcome back {{request.user.username}}, a href="{% url 'account_logout' %}">logout</a>
+    {% else %}
+      Hey Stranger, <a href="{% url 'accout_login' %}">login</a>
+    {% endif %}
+
+    {% endblock %}
+
+
 
     <footer>
       Made with wubb by Sarah|Pybites Ninja
