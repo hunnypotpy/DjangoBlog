@@ -17,22 +17,28 @@
 
     <!-- if you want some nice styling: -->
     <script src="//cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script>
+    <script src="{% static 'js/script.js' %}"></script>
   </head>
 
   <body>
     {# Display django.contrib.messages as Bootstrap alerts #}
     {% bootstrap_messages %}
 
-    {% block content %}
 
-    {% endblock %}
+    <h2>My Django Blog 2 </h2>
+    <div>
+      <strong>Menu:</strong>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>
 
-
-    <script src="{% static 'js/script.js' %}"></script>
-
-    {% block content %}
-
-  <h2>My Django Blog 2 </h2>
 
     {% if request.user.is_authenticated %}
       Welcome back {{request.user.username}}, a href="{% url 'account_logout' %}">logout</a>
@@ -40,13 +46,10 @@
       Hey Stranger, <a href="{% url 'accout_login' %}">login</a>
     {% endif %}
 
-    {% endblock %}
-
-
+    {% block content %}{% endblock %}
 
     <footer>
       Made with wubb by Sarah|Pybites Ninja
     </footer>
   </body>
-
 </html>
