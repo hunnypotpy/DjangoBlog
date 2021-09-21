@@ -19,13 +19,6 @@
         {% endif %}
       </ul>
     </div>
-    {% block content %}
-    {% endblock %}
-    {% endblock %}
-    {% block extra_body %}
-    {% endblock %}
-  </body>
-</html>
 
     {% if request.user.is_authenticated %}
       Welcome back {{request.user.username}}, a href="{% url 'account_logout' %}">logout</a>
@@ -34,3 +27,6 @@
     {% endif %}
 
   {% endblock %}
+
+    {% block extra_body %}
+    {% endblock %}
