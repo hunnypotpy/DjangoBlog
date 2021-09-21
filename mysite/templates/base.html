@@ -25,14 +25,24 @@
 
     {% block content %}
 
-    {% endblock %}
-
-
-    <script src="{% static 'js/script.js' %}"></script>
-
-    {% block content %}
-
   <h2>My Django Blog 2 </h2>
+   <div>
+      <strong>Menu:</strong>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>
+
+    {% endblock %}
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
 
     {% if request.user.is_authenticated %}
       Welcome back {{request.user.username}}, a href="{% url 'account_logout' %}">logout</a>
@@ -41,6 +51,8 @@
     {% endif %}
 
     {% endblock %}
+
+    <script src="{% static 'js/script.js' %}"></script>
 
 
 

@@ -6,6 +6,9 @@ from .forms import BlogForm
 
 # Create your views here.
 
+def index(request):
+    return render(request, 'blog/index.html')
+
 def blog_list(request):
     posts = Blog.objects.all()
     return render(request, 'blog/list.html', {'posts': posts})
