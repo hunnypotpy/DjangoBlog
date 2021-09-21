@@ -39,10 +39,6 @@
       </ul>
     </div>
 
-    {% endblock %}
-    {% endblock %}
-    {% block extra_body %}
-    {% endblock %}
 
     {% if request.user.is_authenticated %}
       Welcome back {{request.user.username}}, a href="{% url 'account_logout' %}">logout</a>
