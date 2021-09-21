@@ -1,27 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-  {% block content %}
+{% block content %}
 
-  <h2>My Django Blog 2 </h2>
-
-      <div>
-      <strong>Menu:</strong>
-      <ul>
-        {% if user.is_authenticated %}
-        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
-        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
-        {% else %}
-        <li><a href="{% url 'account_login' %}">Sign In</a></li>
-        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
-        {% endif %}
-      </ul>
-    </div>
-
-    {% if request.user.is_authenticated %}
-      Welcome back {{request.user.username}}, a href="{% url 'account_logout' %}">logout</a>
-    {% else %}
-      Hey Stranger, <a href="{% url 'account_login' %}">login</a>
-    {% endif %}
-
-  {% endblock %}
+{% endblock %}
