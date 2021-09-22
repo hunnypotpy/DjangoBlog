@@ -1,13 +1,19 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
+from django.views.generic import ListView, DetailView
+from .models import Blog
 
 from .models import Blog
 from .forms import BlogForm
 
 # Create your views here.
 
-def index(request):
-    return render(request, 'blog/index.html')
+#def index(request):
+    #return render(request, 'blog/index.html', {})
+
+class IndexView(ListView):
+    model = Blog
+    template_name = "index.html"
 
 def blog_list(request):
     posts = Blog.objects.all()
