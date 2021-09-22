@@ -9,7 +9,10 @@
         <th>Slug</th>
         <th>Post</th>
         <th>Cover</th>
-        <th colespan="2">Edit Post</th>
+        <th>Author</th>
+        {% if user.is_authenticated %}
+          <th colespan="2">Edit Post</th>
+        {% endif %}
       </tr>
     </thead>
     <tbody>
@@ -19,15 +22,20 @@
             <td>{{ post.slug }}</td>
             <td>{{ post.post }}</td>
             <td><img src="{{ post.cover }}" alt="post cover"></td>
-            <td><a href="{% url "blog:blog_detail" post.id %}" class="btn btn-outline-warning">Edit</a></td>
-            <td><a href="{% url "blog:blog_delete" post.id %}" class="btn btn-outline-danger">Delete</a></td>
+            <td>{{ post.user.username }}</td>
+            {% if user.is_authenticated and post.user == user %}
+              <td><a href="{% url "blog:blog_detail" post.id %}" class="btn btn-outline-warning">Edit</a></td>
+              <td><a href="{% url "blog:blog_delete" post.id %}" class="btn btn-outline-danger">Delete</a></td>
+            {% endif %}
         </tr>
       {% endfor %}
     </tbody>
   </table>
 
-  <div>
+  {% if user.is_authenticated %}
+    <div>
       <a href="{% url "blog:blog_new" %}" class="btn btn-primary">Add a post</a>
-  </div>
+    </div>
+  {% endif %}
 
 {% endblock %}
