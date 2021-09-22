@@ -1,27 +1,20 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404, render, redirect
-from django.views.generic import ListView, DetailView
 from .models import Blog
 
 from .models import Blog
 from .forms import BlogForm
 
-# Create your views here.
-
-#def index(request):
-    #return render(request, 'blog/index.html', {})
-
-class IndexView(ListView):
-    model = Blog
-    template_name = "index.html"
 
 def blog_list(request):
     posts = Blog.objects.all()
     return render(request, 'blog/list.html', {'posts': posts})
 
+
 def blog_detail(request, pk):
     post = get_object_or_404(Blog, pk=pk)
     return render(request, 'blog/detail.html', {'post': post})
+
 
 def blog_new(request):
     form = BlogForm(request.POST or None)
@@ -30,6 +23,7 @@ def blog_new(request):
         messages.success(request, 'Added post')
         return redirect('blog:blog_list')
     return render(request, 'blog/form.html', {'form': form})
+
 
 def blog_edit(request, pk):
     post = get_object_or_404(Blog, pk=pk)
