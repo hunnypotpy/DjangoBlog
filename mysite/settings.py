@@ -68,10 +68,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+# TODO: postgres database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
