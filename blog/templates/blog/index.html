@@ -3,4 +3,12 @@
 
 {% block content %}
 
+    <ul>
+    {% for Blog in object_list %}
+        <li>{{blog.title}}
+        {{blog.author}}<br/>
+        {{blog.body}}</li>
+    {% endfor %}
+    </ul>
+
 {% endblock %}
