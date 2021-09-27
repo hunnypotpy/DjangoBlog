@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from .models import Blog, Comment
 
 from .models import Blog
-from .forms import BlogForm, CommentForm
+from .forms import BlogForm, CommentForm, ImageForm
 
 
 def blog_list(request):
@@ -87,3 +87,16 @@ def post_detail(request, slug, year, month, date, post):
                        'comments': comments,
                        'new_comment': new_comment,
                        'comment_form': comment_form})
+
+def image_upload_view(request):
+    """Process images uploaded by users"""
+    if request.method == 'POST':
+        form = ImageForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            # Get the current instance object to display in the template
+            img_obj = form.instance
+            return render(request, 'index.html', {'form': form, 'img_obj': img_obj})
+    else:
+        form = ImageForm()
+    return render(request, 'index.html', {'form': form})
