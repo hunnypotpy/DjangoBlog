@@ -2,18 +2,21 @@
 {% load bootstrap4 %}
 <!doctype html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="utf-8">
-    <title>My First Django Blog</title>
-    <meta name="description" content="My first Django app">
-    <meta name="author" content="PDM">
     {% bootstrap_css %}
     {% bootstrap_javascript jquery='full' %}
     <link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" />
     <script src="//cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
-  </head>
-  <body>
+
+    {% if title %}
+      <title>Django Blog - {{ title }}</title>
+    {% else %}
+      <title>Django Blog</title>
+    {% endif %}
+</head>
+<body>
     {% bootstrap_messages %}
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -48,7 +51,7 @@
     {% block content %}{% endblock %}
 
     <footer>
-      Made with wubb by Sarah | PyBites Ninja
+      Made with wubb by Sarah
     </footer>
-  </body>
+</body>
 </html>
