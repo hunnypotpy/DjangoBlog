@@ -14,7 +14,9 @@ def blog_list(request):
 
 def blog_detail(request, pk):
     post = get_object_or_404(Blog, pk=pk)
-    return render(request, 'blog/detail.html', {'post': post})
+    form = ImageForm(request.POST or None)
+    context = {'post': post, 'form': form}
+    return render(request, 'blog/detail.html', context)
 
 
 @login_required
@@ -56,37 +58,29 @@ def blog_delete(request, pk):
     return render(request, 'blog/delete.html', {'post': post})
 
 @login_required
-def post_detail(request, slug, year, month, date, post):
+def post_detail(request, slug):
     template_name = 'post_detail.html'
-    post = get_object_or_404(Post, slug=post,
-                             status='published',
-                             publish_year=year,
-                             publish_month=month,
-                             publish_day=day)
+    blog = get_object_or_404(Blog, slug=slug)
 
     # List of active comments for this post
-    comments = post.comments.filter(active=True)
-
     new_comment = None
 
+    comment_form = CommentForm(request.POST or None)
+
     if request.method == 'POST':
-        # A comment was posted
-        comment_form = CommentForm(date=request.POST)
-        if comment_form_is_valid():
-            #Create Comment object but doesn't save database yet
-            new_comment = comment_form.save(comment=False)
-            # Assign the current post to the comment
-            new_comment.post = post
-            # Save comment to the database
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.blog = blog
+            new_comment.author = request.user
             new_comment.save()
-        else:
-            comment_form = CommentForm()
-        return render(request,
-                      'blog/post_detail.html',
-                      {'post': post,
-                       'comments': comments,
-                       'new_comment': new_comment,
-                       'comment_form': comment_form})
+
+    comments = blog.comments.filter(active=True)
+
+    return render(request,
+                    'blog/post_detail.html',
+                    {'blog': blog,
+                    'comments': comments,
+                    'comment_form': comment_form})
 
 def image_upload_view(request):
     """Process images uploaded by users"""

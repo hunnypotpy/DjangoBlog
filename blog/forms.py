@@ -2,6 +2,7 @@ from django.forms import ModelForm
 
 from .models import Blog, Comment, Image
 
+
 class BlogForm(ModelForm):
     class Meta:
         model = Blog
@@ -13,7 +14,7 @@ class CommentForm(ModelForm):
         model = Comment
         fields = ('name', 'body')
 
-    #Form for the image model
+
 class ImageForm(ModelForm):
     class Meta:
         model = Image
