@@ -21,16 +21,24 @@ def blog_detail(request, pk):
 
 @login_required
 def blog_new(request):
-    form = BlogForm(request.POST or None)
-    # first time around set the user / owner
-    if form.is_valid():
-        blog = form.save(commit=False)
+    blog_form = BlogForm(request.POST or None)
+    image_form = ImageForm(request.POST or None, request.FILES)
+
+    if blog_form.is_valid() and image_form.is_valid():
+        blog = blog_form.save(commit=False)
         blog.user = request.user
         blog.save()
 
+        # TODO: this needs to be multiple images
+        im = image_form.save(commit=False)
+        im.blog = blog
+        im.save()
+
         messages.success(request, 'Added post')
         return redirect('blog:blog_list')
-    return render(request, 'blog/form.html', {'form': form})
+
+    context = {'form': blog_form, 'image_form': image_form}
+    return render(request, 'blog/form.html', context)
 
 
 @login_required
