@@ -6,7 +6,7 @@ from .models import Blog, Comment, Image
 class BlogForm(ModelForm):
     class Meta:
         model = Blog
-        fields = ['title', 'post', 'slug']
+        fields = ['title', 'post']
 
 
 class CommentForm(ModelForm):
@@ -18,4 +18,4 @@ class CommentForm(ModelForm):
 class ImageForm(ModelForm):
     class Meta:
         model = Image
-        fields = ('title', 'image')
+        fields = ('image',)
