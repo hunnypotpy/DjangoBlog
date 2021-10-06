@@ -5,7 +5,6 @@
 <head>
     <meta charset="utf-8">
     {% bootstrap_css %}
-    {% bootstrap_javascript jquery='full' %}
     <link href="{% static 'css/main.css' %}" rel="stylesheet" type="text/css" />
 
     {% if title %}
@@ -52,6 +51,7 @@
       Made with wubb by Sarah
     </footer>
 
+    {% bootstrap_javascript jquery='full' %}
     <script src="//cdn.muicss.com/mui-0.10.1/js/mui.min.js"></script>
     <script src="{% static 'js/script.js' %}"></script>
 
