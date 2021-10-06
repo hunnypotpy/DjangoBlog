@@ -17,24 +17,17 @@
     </thead>
     <tbody>
       {% for post in posts %}
-        <article class="media content-section">
-          <div class="media-body">
-            <div class="article-metadata">
-                <div class="article-metadata">
-            <tr>
-                <td><a href="{% url "blog:post_detail" post.slug %}">{{post.title }}</a></td>
-                <td>{{ post.slug }}</td>
-                <td>{{ post.post }}</td>
-                <td><img src="{{ post.cover }}" alt="post cover"></td>
-                <td>{{ post.user.username }}</td>
-                {% if user.is_authenticated and post.user == user %}
-                  <td><a href="{% url "blog:blog_detail" post.id %}" class="btn btn-outline-warning">Edit</a></td>
-                  <td><a href="{% url "blog:blog_delete" post.id %}" class="btn btn-outline-danger">Delete</a></td>
-                {% endif %}
-            </tr>
-          </div>
-        </article>
-
+        <tr>
+            <td><a href="{% url "blog:post_detail" post.slug %}">{{post.title }}</a></td>
+            <td>{{ post.slug }}</td>
+            <td>{{ post.post }}</td>
+            <td><img src="{{ post.cover }}" alt="post cover"></td>
+            <td>{{ post.user.username }}</td>
+            {% if user.is_authenticated and post.user == user %}
+              <td><a href="{% url "blog:blog_detail" post.id %}" class="btn btn-outline-warning">Edit</a></td>
+              <td><a href="{% url "blog:blog_delete" post.id %}" class="btn btn-outline-danger">Delete</a></td>
+            {% endif %}
+        </tr>
       {% endfor %}
     </tbody>
   </table>
