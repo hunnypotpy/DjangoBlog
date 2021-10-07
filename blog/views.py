@@ -1,6 +1,9 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
+from django.utils.text import slugify
+
+
 from .models import Blog, Comment
 
 from .models import Blog
@@ -26,6 +29,7 @@ def blog_new(request):
 
     if blog_form.is_valid() and image_form.is_valid():
         blog = blog_form.save(commit=False)
+        blog.slug = slugify(blog.title)
         blog.user = request.user
         blog.save()
 
@@ -69,6 +73,7 @@ def blog_delete(request, pk):
 def post_detail(request, slug):
     template_name = 'post_detail.html'
     blog = get_object_or_404(Blog, slug=slug)
+    images = blog.image_set.all()
 
     # List of active comments for this post
     new_comment = None
@@ -87,6 +92,7 @@ def post_detail(request, slug):
     return render(request,
                     'blog/post_detail.html',
                     {'blog': blog,
+                    'images': images,
                     'comments': comments,
                     'comment_form': comment_form})
 

@@ -5,11 +5,12 @@
 {% block content %}
 
     <h1>{% if post %}Edit{% else %}New{% endif %} Post</h1>
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-            {% bootstrap_form form %}
+        {% bootstrap_form form %}
 
+        {% bootstrap_form image_form %}
 
         <input type="submit" value="{%if post %}Edit{% else %}New{% endif %}" />
         <a href="{%url "blog:blog_list" %}">Go Back</a>
