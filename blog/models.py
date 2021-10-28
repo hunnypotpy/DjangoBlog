@@ -34,7 +34,7 @@ class Blog(models.Model):
 
 
 class Comment(models.Model):
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, related_name="comments")
     name = models.CharField(max_length=80)
     body = models.TextField()
