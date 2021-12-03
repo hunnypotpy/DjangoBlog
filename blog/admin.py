@@ -10,7 +10,11 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ('name', 'body')
     actions = ['approve_comments']
 
+#corey
+'''from django.contrib import admin
+from .models import Post
 
+admin.site.register(Post)'''
 
 
 
