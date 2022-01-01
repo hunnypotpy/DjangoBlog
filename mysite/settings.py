@@ -28,12 +28,13 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
+    'users.apps.UsersConfig',
     #3rd party
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'bootstrap4',
-    'crispy_forms'
+    'crispy_forms',
     #own
     'blog',
 ]
@@ -148,3 +149,5 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+
