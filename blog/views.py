@@ -3,10 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.text import slugify
 
-
 from .models import Blog, Comment
-
-from .models import Blog
 from .forms import BlogForm, CommentForm, ImageForm
 
 
@@ -50,13 +47,16 @@ def blog_edit(request, pk):
     # Nth time around / editing, check if owner is accessing
     post = get_object_or_404(Blog, pk=pk, user=request.user)
     form = BlogForm(request.POST or None, instance=post)
+    image_form = ImageForm(request.POST or None, request.FILES)
     if form.is_valid():
         form.save()
         messages.success(request, 'Updated post')
         return redirect('blog:blog_list')
 
     return render(request, 'blog/form.html', {'post': post,
-                                              'form': form})
+                                              'form': form,
+                                              'image_form': image_form})
+
 
 @login_required
 def blog_delete(request, pk):
@@ -68,6 +68,7 @@ def blog_delete(request, pk):
         return redirect('blog:blog_list')
 
     return render(request, 'blog/delete.html', {'post': post})
+
 
 @login_required
 def post_detail(request, slug):
@@ -95,6 +96,7 @@ def post_detail(request, slug):
                     'images': images,
                     'comments': comments,
                     'comment_form': comment_form})
+
 
 def image_upload_view(request):
     """Process images uploaded by users"""
