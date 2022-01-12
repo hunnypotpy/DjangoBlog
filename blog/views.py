@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, render, redirect
 from django.utils.text import slugify
 
-from .models import Blog, Comment
+from .models import Blog, Comment, Image
 from .forms import BlogForm, CommentForm, ImageForm
 
 
@@ -46,15 +46,23 @@ def blog_new(request):
 def blog_edit(request, pk):
     # Nth time around / editing, check if owner is accessing
     post = get_object_or_404(Blog, pk=pk, user=request.user)
-    form = BlogForm(request.POST or None, instance=post)
+    blog_form = BlogForm(request.POST or None, instance=post)
     image_form = ImageForm(request.POST or None, request.FILES)
-    if form.is_valid():
-        form.save()
+    if blog_form.is_valid() and image_form.is_valid():
+        blog_post = blog_form.save()
+
+        # delete previous images
+        Image.objects.filter(blog=blog_post).delete()
+
+        img = image_form.save(commit=False)
+        img.blog = blog_post
+        img.save()
+
         messages.success(request, 'Updated post')
         return redirect('blog:blog_list')
 
     return render(request, 'blog/form.html', {'post': post,
-                                              'form': form,
+                                              'blog_form': blog_form,
                                               'image_form': image_form})
 
 

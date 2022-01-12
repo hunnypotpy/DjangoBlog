@@ -8,7 +8,9 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {% bootstrap_form form %}
+        {% bootstrap_form blog_form %}
+
+        <img style="width: 400px;" src="{{ post.image_set.first.image.url }}" alt="post cover">
 
         {% bootstrap_form image_form %}
 
