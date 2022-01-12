@@ -10,6 +10,8 @@
 
         {% bootstrap_form blog_form %}
 
+        <img style="width: 400px;" src="{{ post.image_set.first.image.url }}" alt="post cover">
+
         {% bootstrap_form image_form %}
 
         <input type="submit" value="{% if post %}Edit{% else %}New{% endif %}" />
