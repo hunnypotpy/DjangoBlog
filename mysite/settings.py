@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 
 from dotenv import load_dotenv
+from decouple import config, Csv
+import dj_database_url
 
 load_dotenv()
 
@@ -70,14 +72,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # TODO: postgres database
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': BASE_DIR / 'apple_DB',
-        'USER': 'applepie',
-        'PASSWORD': '',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
 }
 
 '''DATABASES = {
