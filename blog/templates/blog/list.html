@@ -21,7 +21,9 @@
             <td><a href="{% url "blog:post_detail" post.slug %}">{{post.title }}</a></td>
             <td>{{ post.slug }}</td>
             <td>{{ post.post }}</td>
-            <td><img style="width: 400px;" src="{{ post.image_set.first.image.url }}" alt="post cover"></td>
+            {% if image.image.url %}
+                <td><img style="width: 400px;" src="{{ post.image_set.first.image.url }}" alt="post cover"></td>
+            {% endif %}
             <td>{{ post.user.username }}</td>
             {% if user.is_authenticated and post.user == user %}
               <td><a href="{% url "blog:blog_edit" post.id %}" class="btn btn-outline-warning">Edit</a></td>

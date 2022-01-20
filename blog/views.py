@@ -14,8 +14,8 @@ def blog_list(request):
 
 def blog_detail(request, pk):
     post = get_object_or_404(Blog, pk=pk)
-    form = ImageForm(request.POST or None)
-    context = {'post': post, 'form': form}
+    form = ImageForm(request.POST or None, request.FILES)
+    context = {'post': post, 'blog_form': blog_form}
     return render(request, 'blog/detail.html', context)
 
 
@@ -38,7 +38,7 @@ def blog_new(request):
         messages.success(request, 'Added post')
         return redirect('blog:blog_list')
 
-    context = {'form': blog_form, 'image_form': image_form}
+    context = {'blog_form': blog_form, 'image_form': image_form}
     return render(request, 'blog/form.html', context)
 
 

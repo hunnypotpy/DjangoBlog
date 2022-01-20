@@ -50,7 +50,7 @@ class Comment(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to='images/', blank = True)
+    image = models.ImageField(upload_to='images/', blank = True, null=True)
     # TODO: upload image to cloud / S3
     url = models.URLField(blank=True, null=True)
     blog = models.ForeignKey(Blog, on_delete=models.CASCADE, blank=True, null=True)
