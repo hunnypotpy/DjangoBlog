@@ -8,8 +8,10 @@
         <p class=" text-muted">{{ blog.user.username }} | {{ blog.added|timesince }} ago</p>
         <p class="card-text ">{{ blog.post | safe }}
         {% for image in images %}
-          <img src="{{ image.image.url }}" alt="image for {{ blog.title }}">
-        {% endfor %}
+          {% if image.image.url %}
+            <img src="{{ image.image.url }}" alt="image for {{ blog.title }}">
+          {% endif %}
+
 
         </p>
       </div>

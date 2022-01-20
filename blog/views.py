@@ -14,7 +14,7 @@ def blog_list(request):
 
 def blog_detail(request, pk):
     post = get_object_or_404(Blog, pk=pk)
-    form = ImageForm(request.POST or None)
+    form = ImageForm(request.POST or None, request.FILES)
     context = {'post': post, 'blog_form': blog_form}
     return render(request, 'blog/detail.html', context)
 

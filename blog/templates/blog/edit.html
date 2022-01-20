@@ -10,7 +10,9 @@
 
         {% bootstrap_form blog_form %}
 
-        <img style="width: 400px;" src="{{ post.image_set.first.image.url }}" alt="post cover">
+        {% if image.image.url %}
+            <img style="width: 400px;" src="{{ post.image_set.first.image.url }}" alt="post cover">
+        {% endif %}
 
         {% bootstrap_form image_form %}
 
