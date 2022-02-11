@@ -16,9 +16,7 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 SECRET_KEY = os.environ["SECRET_KEY"]
 DEBUG = os.environ.get("DEBUG", False)
-
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # Application definition
 
