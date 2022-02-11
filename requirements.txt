@@ -14,7 +14,7 @@ Django==3.2.7
 django-allauth==0.45.0
 django-bootstrap4==3.0.1
 django-crispy-forms==1.13.0
-gunicorn
+gunicorn==20.1.0
 idna==3.2
 oauthlib==3.1.1
 pendulum==2.1.2
@@ -42,3 +42,4 @@ tabulate==0.8.9
 urllib3==1.26.6
 wcwidth==0.2.5
 whitenoise==5.3.0
+sentry-sdk==1.5.5
